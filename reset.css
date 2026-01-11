@@ -1,0 +1,61 @@
+/* Обнуление базовых стилей */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Убираем стандартные отступы у основных блоков */
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, blockquote, figure, pre {
+  margin: 0;
+  padding: 0;
+}
+
+/* Убираем маркеры у списков */
+ul, ol {
+  list-style: none;
+}
+
+/* Сбрасываем оформление ссылок и кнопок */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button, input, textarea, select {
+  font: inherit;
+  outline: none;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Убираем выделение по двойному клику на кнопках и т.п. (опционально) */
+button {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Изображения масштабируются корректно */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Убираем подсветку при фокусе (если не нужна — лучше оставить для доступности!) */
+/* :focus {
+  outline: none;
+} */
+
+/* Базовые настройки body */
+body {
+  line-height: 1.5;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #000;
+  background: #fff;
+}

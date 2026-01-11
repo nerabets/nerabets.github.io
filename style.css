@@ -1,0 +1,200 @@
+/* Универсальный сброс (если reset.css не делает этого) */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #000;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: system-ui, sans-serif;
+}
+
+/* Основной контейнер — ограничивает максимальную ширину и задаёт отступы */
+.container {
+  width: 100%;
+  max-width: 500px; /* Макс. ширина всего блока */
+  padding: 0 1.5rem; /* Отступы от краёв экрана на всех устройствах */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Изображение */
+.hero-image {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+}
+
+/* Общие стили кнопок */
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.9rem 1.1rem;
+  border-radius: 16px;
+  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  min-height: 3.4rem;
+  transition: opacity 0.2s;
+  cursor: pointer;
+  color: white;
+}
+
+/* Кнопка "Сырое" — одиночная, на всю ширину контейнера */
+.btn--raw {
+  width: 100%;
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+/* Группа кнопок "Отобранное" */
+.buttons-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Кнопки внутри группы — растягиваются, но не более 2 в ряд */
+.btn--vk,
+.btn--tg {
+  flex: 1;
+  min-width: 160px; /* Минимальная ширина, чтобы не сжимались сильно */
+  max-width: calc(50% - 0.5rem); /* Макс. половина строки с учётом gap */
+}
+
+.btn--vk { background-color: #0077FF; }
+.btn--tg { background-color: #3390EC; }
+
+
+
+/* === Обновлённый плеер === */
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 450px;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.play-btn {
+  background: none;
+  border: 2px solid #0077FF;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  color: #0077FF;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.play-btn:hover {
+  background: #0077FF;
+  color: white;
+}
+
+.track-info {
+  text-align: center;
+  color: #222;
+}
+
+.track-title {
+  font-weight: 700;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  line-height: 1.2;
+}
+
+.track-artist {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  color: #666;
+}
+
+/* Элементы управления */
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 360px;
+}
+
+.control {
+  font-size: 1.1rem;
+  opacity: 0.5;
+}
+
+
+
+.timeline {
+  flex: 1;
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: #0077FF;
+  border-radius: 2px;
+}
+
+/* Архив — список папок под основным блоком */
+.archive {
+  width: 100%;
+  max-width: 500px;
+  padding: 0 1.5rem;
+  margin: 1.5rem auto 2rem;
+}
+
+.archive ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.archive li a {
+  color: #0077FF;
+  text-decoration: none;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed #eee;
+  transition: color 0.2s;
+}
+
+.archive li a:hover {
+  color: #0055cc;
+}
+
+
+/* На очень узких экранах — кнопки становятся по одной */
+@media (max-width: 360px) {
+  .btn--vk,
+  .btn--tg {
+    max-width: 100%;
+  }
+}
