@@ -1,0 +1,395 @@
+/* Универсальный сброс (если reset.css не делает этого) */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #000;
+  font-family: system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+  /* Убрано display: flex и min-height: 100dvh — чтобы длинный контент скроллился */
+}
+
+/* Основной контейнер — ограничивает максимальную ширину и задаёт отступы */
+.container {
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem 1.5rem; /* Отступы сверху/снизу + по бокам */
+  margin: 0 auto; /* Центрирование по горизонтали */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+footer {
+  text-align: center;
+}
+
+/* Изображение */
+.hero-image {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+}
+
+/* Общие стили кнопок */
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.9rem 1.1rem;
+  border-radius: 16px;
+  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  min-height: 3.4rem;
+  transition: opacity 0.2s;
+  cursor: pointer;
+  color: white;
+}
+
+/* Кнопка "Сырое" — одиночная, на всю ширину контейнера */
+.btn--raw {
+  width: 100%;
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+/* Группа кнопок "Отобранное" */
+.buttons-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Кнопки внутри группы — растягиваются, но не более 2 в ряд */
+.btn--vk,
+.btn--tg,
+.btn--avito {
+  flex: 1;
+  min-width: 160px;
+  max-width: calc(50% - 0.5rem);
+}
+
+.btn--vk { background-color: #0077FF; }
+.btn--tg { background-color: #3390EC; }
+.btn--avito { background-color: #ffffff; color: #000; border: 1px solid black; }
+
+/* === Обновлённый плеер === */
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 450px;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.play-btn {
+  background: none;
+  border: 2px solid #0077FF;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  color: #0077FF;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.play-btn:hover {
+  background: #0077FF;
+  color: white;
+}
+
+.track-info {
+  text-align: center;
+  color: #222;
+}
+
+.track-title {
+  font-weight: 700;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  line-height: 1.2;
+}
+
+.track-artist {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  color: #666;
+}
+
+/* Элементы управления */
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 360px;
+}
+
+.control {
+  font-size: 1.1rem;
+  opacity: 0.5;
+}
+
+.timeline {
+  flex: 1;
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: #0077FF;
+  border-radius: 2px;
+}
+
+/* Архив — список папок под основным блоком */
+.archive {
+  width: 100%;
+  max-width: 500px;
+  padding: 0 1.5rem;
+  margin: 1.5rem auto 2rem;
+}
+
+.archive ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.archive li a {
+  color: #0077FF;
+  text-decoration: none;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed #eee;
+  transition: color 0.2s;
+}
+
+.archive li a:hover {
+  color: #0055cc;
+}
+
+.dotted-link {
+  text-decoration: none;
+  border-bottom: 2px dashed #5050502e;
+}
+
+.mini-gray {
+  font-size: 0.7rem;
+  color: gray;
+}
+
+/* === Кастомный курсор для навигации по датам === */
+#game-cursor {
+  position: absolute;
+  z-index: 10000;
+  pointer-events: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0077FF;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.15s, transform 0.15s;
+  top: 0;
+  left: 0;
+}
+
+#game-cursor.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Убираем стандартную фокус-рамку с дат */
+.archive li a:focus {
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  /* Отступы между элементами: даты, месяцы, годы */
+  /* .archive > h2, */
+  .archive > h3,
+  .archive ul {
+    margin-bottom: 1rem; /* отступ снизу у каждого блока */
+  }
+
+  /* Ссылки в заголовках годов */
+  .archive > h2 a.dotted-link {
+    display: inline-block;
+    padding: 0.6rem 0;
+    min-height: 2.4rem;
+  }
+
+  /* Ссылки в заголовках месяцев */
+  .archive > h3 a.dotted-link {
+    display: inline-block;
+    padding: 0.6rem 0;
+    min-height: 2.4rem;
+  }
+
+  /* Сами даты внутри <li> */
+  .archive li a {
+    padding: 0.6rem 0;
+    min-height: 2.4rem;
+  }
+
+  /* Дополнительно: чуть больше gap между датами */
+  .archive ul {
+    gap: 1.2rem;
+  }
+}
+
+
+
+/* На очень узких экранах — кнопки становятся по одной */
+@media (max-width: 360px) {
+  .btn--vk,
+  .btn--tg {
+    max-width: 100%;
+  }
+}
+
+
+/* === ТЁМНАЯ ТЕМА === */
+
+/* 1. Системная тёмная тема (если не задан data-theme="light") */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  html:not([data-theme="light"]) .track-info,
+  html:not([data-theme="light"]) .track-title,
+  html:not([data-theme="light"]) .track-artist,
+  html:not([data-theme="light"]) .mini-gray {
+    color: #e0e0e0;
+  }
+
+  html:not([data-theme="light"]) .archive li a {
+    color: #4da6ff;
+  }
+  html:not([data-theme="light"]) .archive li a:hover {
+    color: #80ccff;
+  }
+
+  html:not([data-theme="light"]) .dotted-link {
+    border-bottom-color: #555;
+    color: #bbddff;
+  }
+
+  html:not([data-theme="light"]) .player {
+    background: #1e1e1e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  html:not([data-theme="light"]) .play-btn {
+    border-color: #4da6ff;
+    color: #4da6ff;
+  }
+  html:not([data-theme="light"]) .play-btn:hover {
+    background: #4da6ff;
+    color: white;
+  }
+
+  html:not([data-theme="light"]) .timeline {
+    background: #333;
+  }
+
+  html:not([data-theme="light"]) #game-cursor {
+    color: #4da6ff;
+  }
+
+  html:not([data-theme="light"]) .btn--raw {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+  }
+
+  html:not([data-theme="light"]) .btn--avito {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-color: #555;
+  }
+}
+
+/* 2. Принудительная тёмная тема через data-theme="dark" */
+html[data-theme="dark"] body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+html[data-theme="dark"] .track-info,
+html[data-theme="dark"] .track-title,
+html[data-theme="dark"] .track-artist,
+html[data-theme="dark"] .mini-gray {
+  color: #e0e0e0;
+}
+
+html[data-theme="dark"] .archive li a {
+  color: #4da6ff;
+}
+html[data-theme="dark"] .archive li a:hover {
+  color: #80ccff;
+}
+
+html[data-theme="dark"] .dotted-link {
+  border-bottom-color: #555;
+  color: #bbddff;
+}
+
+html[data-theme="dark"] .player {
+  background: #1e1e1e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .play-btn {
+  border-color: #4da6ff;
+  color: #4da6ff;
+}
+html[data-theme="dark"] .play-btn:hover {
+  background: #4da6ff;
+  color: white;
+}
+
+html[data-theme="dark"] .timeline {
+  background: #333;
+}
+
+html[data-theme="dark"] #game-cursor {
+  color: #4da6ff;
+}
+
+html[data-theme="dark"] .btn--raw {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+}
+
+html[data-theme="dark"] .btn--avito {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border-color: #555;
+}
